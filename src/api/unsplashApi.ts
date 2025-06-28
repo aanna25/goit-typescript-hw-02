@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from "axios";
-// import { Image } from "../components/App/App.types";
+
+import type { Image } from "../components/App/App.types";
 
 interface UnsplashResponse {
   results: Image[];
