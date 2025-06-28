@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getImages } from "../../api/unsplashApi";
+import { getImages, UnsplashResponse } from "../../api/unsplashApi";
 import style from "../../App.module.css";
 import toast, { Toaster } from "react-hot-toast";
 import SearchBar from "../SearchBar/SearchBar";
@@ -28,7 +28,10 @@ export default function App() {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        const { results, total_pages } = await getImages(query, page);
+        const { results, total_pages }: UnsplashResponse = await getImages(
+          query,
+          page
+        );
         if (results.length === 0 && page === 1) {
           setIsEmpty(true);
           return;

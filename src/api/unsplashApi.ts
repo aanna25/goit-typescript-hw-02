@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from "axios";
 
 import type { UnsplashImage } from "../components/App/App.types";
 
-interface UnsplashResponse {
+export interface UnsplashResponse {
   results: UnsplashImage[];
   total_pages: number;
 }
@@ -14,7 +14,7 @@ export const getImages = async (
   query: string,
   page: number = 1,
   perPage: number = 12
-) => {
+): Promise<UnsplashResponse> => {
   const response = await axios.get<UnsplashResponse>(
     `${BASE_URL}/search/photos`,
     {
