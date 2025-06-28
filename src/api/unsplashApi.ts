@@ -15,7 +15,7 @@ export const getImages = async (
   page: number = 1,
   perPage: number = 12
 ) => {
-  const response: AxiosResponse<UnsplashResponse> = await axios.get(
+  const response = await axios.get<UnsplashResponse>(
     `${BASE_URL}/search/photos`,
     {
       params: {
