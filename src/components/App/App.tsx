@@ -1,24 +1,26 @@
 import { useState, useEffect } from "react";
-import { getImages } from "./api/unsplashApi";
-import style from "./App.module.css";
+import { getImages } from "../../api/unsplashApi";
+import style from "../../App.module.css";
 import toast, { Toaster } from "react-hot-toast";
-import SearchBar from "./components/SearchBar/SearchBar";
-import ImageGallery from "./components/ImageGallery/ImageGallery";
-import Loader from "./components/Loader/Loader";
-import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
-import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
-import ImageModal from "./components/ImageModal/ImageModal";
+import SearchBar from "../SearchBar/SearchBar";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import ImageGallery from "../ImageGallery/ImageGallery";
+import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
+import ImageModal from "../ImageModal/ImageModal";
+import Loader from "../Loader/Loader";
+
+import { Image, ModalImage } from "./App.types";
 
 export default function App() {
-  const [query, setQuery] = useState("");
-  const [page, setPage] = useState(1);
-  const [images, setImages] = useState([]);
-  const [hasMorePhotos, setHasMorePhotos] = useState(false);
-  const [isEmpty, setIsEmpty] = useState(false);
-  const [error, setError] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [modalImage, setModalImage] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [query, setQuery] = useState<string>("");
+  const [page, setPage] = useState<number>(1);
+  const [images, setImages] = useState<Image[]>([]);
+  const [hasMorePhotos, setHasMorePhotos] = useState<boolean>(false);
+  const [isEmpty, setIsEmpty] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [modalImage, setModalImage] = useState<ModalImage | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   useEffect(() => {
     if (!query) return;
@@ -42,7 +44,7 @@ export default function App() {
     fetchData();
   }, [query, page]);
 
-  const handleSearch = (newQuery) => {
+  const handleSearch = (newQuery: string) => {
     if (!newQuery.trim()) {
       toast.error("Please enter a search query");
       return;
@@ -59,7 +61,7 @@ export default function App() {
     setPage(page + 1);
   };
 
-  const handleOpenModal = (image) => {
+  const handleOpenModal = (image: Image) => {
     setModalImage({
       url: image.urls.regular,
       alt: image.alt_description,
@@ -89,13 +91,11 @@ export default function App() {
       {images.length > 0 && hasMorePhotos && (
         <LoadMoreBtn onClick={handleLoadMore} />
       )}
-      {modalImage && (
-        <ImageModal
-          isOpen={isModalOpen}
-          image={modalImage}
-          onClose={handleCloseModal}
-        />
-      )}
+      <ImageModal
+        isOpen={isModalOpen}
+        image={modalImage}
+        onClose={handleCloseModal}
+      />
     </div>
   );
 }

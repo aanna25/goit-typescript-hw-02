@@ -1,6 +1,12 @@
 import style from "./ImageCard.module.css";
+import type { Image } from "../App/App.types";
 
-export default function ImageCard({ image, onClick }) {
+interface ImageCardProps {
+  image: Image;
+  onClick: (image: Image) => void;
+}
+
+export default function ImageCard({ image, onClick }: ImageCardProps) {
   return (
     <div className={style.card} onClick={() => onClick(image)}>
       <img

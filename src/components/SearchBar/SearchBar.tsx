@@ -2,10 +2,14 @@ import { useState } from "react";
 import style from "./SearchBar.module.css";
 import { MdOutlineSearch } from "react-icons/md";
 
-export default function SearchBar({ onSubmit }) {
-  const [query, setQuery] = useState("");
+interface SearchBarProps {
+  onSubmit: (query: string) => void;
+}
 
-  const handleSubmit = (e) => {
+export default function SearchBar({ onSubmit }: SearchBarProps) {
+  const [query, setQuery] = useState<string>("");
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     onSubmit(query);
     setQuery("");
@@ -21,7 +25,9 @@ export default function SearchBar({ onSubmit }) {
             autoFocus
             placeholder="Image and photo search"
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setQuery(e.target.value)
+            }
             className={style.input}
           />
           <MdOutlineSearch className={style.icon} size="16px" />
