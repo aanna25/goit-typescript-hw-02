@@ -1,9 +1,9 @@
 import axios, { AxiosResponse } from "axios";
 
-import type { Image } from "../components/App/App.types";
+import type { UnsplashImage } from "../components/App/App.types";
 
 interface UnsplashResponse {
-  results: Image[];
+  results: UnsplashImage[];
   total_pages: number;
 }
 

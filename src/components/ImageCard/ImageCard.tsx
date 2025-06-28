@@ -1,9 +1,9 @@
 import style from "./ImageCard.module.css";
-import type { Image } from "../App/App.types";
+import type { UnsplashImage } from "../App/App.types";
 
 interface ImageCardProps {
-  image: Image;
-  onClick: (image: Image) => void;
+  image: UnsplashImage;
+  onClick: (image: UnsplashImage) => void;
 }
 
 export default function ImageCard({ image, onClick }: ImageCardProps) {

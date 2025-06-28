@@ -9,12 +9,12 @@ import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
 import ImageModal from "../ImageModal/ImageModal";
 import Loader from "../Loader/Loader";
 
-import { Image, ModalImage } from "./App.types";
+import { UnsplashImage, ModalImage } from "./App.types";
 
 export default function App() {
   const [query, setQuery] = useState<string>("");
   const [page, setPage] = useState<number>(1);
-  const [images, setImages] = useState<Image[]>([]);
+  const [images, setImages] = useState<UnsplashImage[]>([]);
   const [hasMorePhotos, setHasMorePhotos] = useState<boolean>(false);
   const [isEmpty, setIsEmpty] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
@@ -61,7 +61,7 @@ export default function App() {
     setPage(page + 1);
   };
 
-  const handleOpenModal = (image: Image) => {
+  const handleOpenModal = (image: UnsplashImage) => {
     setModalImage({
       url: image.urls.regular,
       alt: image.alt_description,

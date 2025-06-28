@@ -1,11 +1,11 @@
 import ImageCard from "../ImageCard/ImageCard";
 import style from "./ImageGallery.module.css";
 
-import { Image } from "../App/App.types";
+import { UnsplashImage } from "../App/App.types";
 
 interface ImageGalleryProps {
-  images: Image[];
-  onImageClick: (image: Image) => void;
+  images: UnsplashImage[];
+  onImageClick: (image: UnsplashImage) => void;
 }
 
 export default function ImageGallery({
